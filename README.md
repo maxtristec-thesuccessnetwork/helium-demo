@@ -13,10 +13,12 @@ Just open `index.html` in a browser. (Or `python3 -m http.server` in this folder
 
 ## Deploy (GitHub → Vercel)
 1. Create a new **empty** repo on github.com (e.g. `helium-demo`). Don't add a README/license.
-2. In this folder, connect and push (the local repo is already initialised and committed):
+2. In this folder, connect and push (the local repo is already initialised and committed). The first two lines clear stale lock files left over from setup — run them once:
    ```bash
-   git remote add origin https://github.com/<your-username>/helium-demo.git
+   rm -f .git/*.lock .git/objects/maintenance.lock
+   git gc --prune=now            # tidies leftover temp objects (optional)
    git branch -M main
+   git remote add origin https://github.com/<your-username>/helium-demo.git
    git push -u origin main
    ```
 3. On vercel.com → **Add New → Project** → import the repo.

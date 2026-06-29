@@ -36,7 +36,9 @@
   .word{font-family:"Space Grotesk";font-weight:500;font-size:1.2rem;letter-spacing:-.035em}
   .word b{color:var(--twilight)}
 
-  header{position:fixed;inset:0 0 auto 0;z-index:50;backdrop-filter:blur(14px);background:rgba(13,21,34,.55);border-bottom:1px solid var(--border)}
+  header{position:fixed;inset:0 0 auto 0;z-index:50;backdrop-filter:blur(14px);background:rgba(13,21,34,.55);border-bottom:1px solid transparent;transition:background .4s var(--ease),border-color .4s var(--ease),box-shadow .4s var(--ease)}
+  header.scrolled{background:rgba(13,21,34,.9);border-bottom-color:var(--border);box-shadow:0 6px 28px rgba(0,0,0,.32)}
+  @media(max-width:600px){.scrollcue{display:none}}
   nav{display:flex;align-items:center;justify-content:space-between;height:72px}
   .nav-links{display:flex;gap:32px;align-items:center}
   .nav-links a{font-size:.94rem;color:var(--mist);transition:color .3s}
@@ -70,8 +72,12 @@
   .he-word i{display:inline-block;color:var(--twilight);font-style:normal;opacity:0}
   .hero h1{font-size:clamp(3rem,8vw,6rem);max-width:15ch;font-weight:400;letter-spacing:-.04em}
   .hero h1 em{font-style:normal;background:var(--grad);background-size:200% 200%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shift 6s ease infinite}
-  .hero p{font-size:clamp(1.1rem,2vw,1.45rem);color:var(--mist);max-width:52ch;margin-top:28px}
-  .hero .cta{display:flex;gap:16px;margin-top:44px;flex-wrap:wrap}
+  .hero p{font-size:clamp(1.1rem,2vw,1.45rem);color:var(--mist);max-width:44ch;margin-top:26px}
+  .hero .cta{display:flex;gap:16px;margin-top:40px;flex-wrap:wrap}
+  .scrollcue{display:inline-flex;align-items:center;gap:10px;margin-top:56px;font-family:"Space Mono";font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mist)}
+  .scrollcue span{width:22px;height:34px;border:1px solid var(--border);border-radius:100px;position:relative}
+  .scrollcue span::after{content:"";position:absolute;left:50%;top:7px;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:var(--twilight);animation:cue 1.8s var(--ease) infinite}
+  @keyframes cue{0%{transform:translateY(0);opacity:0}30%{opacity:1}100%{transform:translateY(13px);opacity:0}}
 
   section{padding:110px 0}
   .alt{background:var(--ink-1)}
@@ -88,7 +94,7 @@
   .case .bg{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;transition:transform .8s var(--ease)}
   .case:hover .bg{transform:scale(1.06)}
   .case .bg.g1{background:var(--grad)}
-  .case .bg.g2{background:linear-gradient(135deg,#46566E,#0D1522)}
+  .case .bg.g2{background:repeating-linear-gradient(115deg,#1A2638 0 22px,#20303f 22px 44px),linear-gradient(135deg,#7C73F0aa,#0D1522);background-blend-mode:overlay}
   .case .bg.g3{background:linear-gradient(135deg,#2E86C7,#16344E)}
   .case .scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(transparent 30%,rgba(13,21,34,.92))}
   .case .body{position:relative;z-index:2;padding:30px}
@@ -172,11 +178,12 @@
         <div class="he-word"><span>h</span><span>e</span><span>l</span><span>i</span><span>u</span><span>m</span><i>.</i></div>
       </div>
       <h1>We take the weight off — so your business <em>rises.</em></h1>
-      <p>We work with growing businesses that are tired of being held back by a slow site or manual busywork. Websites, systems and automation — diagnosed by a business analyst, then built.</p>
+      <p>Websites, systems and automation for growing businesses — diagnosed by a business analyst, then built.</p>
       <div class="cta">
         <a href="#contact" class="btn btn-grad">Start a diagnosis →</a>
         <a href="#work" class="btn btn-ghost">See our work</a>
       </div>
+      <a href="#work" class="scrollcue" aria-label="Scroll to work"><span></span>Scroll</a>
     </div>
   </section>
 
@@ -185,9 +192,9 @@
     <div class="wrap">
       <div class="sec-head"><h2>Work that <span class="italic">earns its keep.</span></h2><p>Premium builds with real craft underneath — and a job to do for the business.</p></div>
       <div class="work-grid">
-        <a class="case wide reveal"><div class="bg" style="background-image:url('assets/work-aquavistas.jpg')"></div><div class="scrim"></div><div class="body"><div class="tags"><span class="tag">Premium</span><span class="tag">Multi-page</span><span class="tag">CRM</span></div><h3>Aquavistas</h3><p>A fast, premium site with a filterable show catalogue and CRM-backed enquiry flow for a superyacht entertainment brand.</p></div></a>
+        <a class="case wide reveal"><div class="bg" style="background-image:url('assets/work-aquavistas.webp')"></div><div class="scrim"></div><div class="body"><div class="tags"><span class="tag">Premium</span><span class="tag">Multi-page</span><span class="tag">CRM</span></div><h3>Aquavistas</h3><p>A fast, premium site with a filterable show catalogue and CRM-backed enquiry flow for a superyacht entertainment brand.</p></div></a>
         <a class="case narrow reveal"><div class="bg g2"></div><div class="scrim"></div><div class="body"><div class="tags"><span class="tag">Motion</span><span class="tag">Interaction</span></div><h3>Motion With Intent</h3><p>The craft layer that makes a site feel alive.</p></div></a>
-        <a class="case narrow reveal"><div class="bg g3"></div><div class="scrim"></div><div class="body"><div class="tags"><span class="tag">Local</span><span class="tag">Lead-gen</span></div><h3>ResQ Tyres</h3><p>A fast, mobile-first site built to turn roadside emergencies into calls.</p></div></a>
+        <a class="case narrow reveal"><div class="bg" style="background-image:url('assets/work-resq.jpg')"></div><div class="scrim"></div><div class="body"><div class="tags"><span class="tag">Local</span><span class="tag">Lead-gen</span></div><h3>ResQ Tyres</h3><p>A fast, mobile-first site built to turn roadside emergencies into calls.</p></div></a>
         <a class="case wide reveal"><div class="bg g1"></div><div class="scrim"></div><div class="body"><div class="tags"><span class="tag">Your business</span></div><h3>You're next.</h3><p>Tell us what's slowing you down — we'll diagnose it and show you what's worth building.</p></div></a>
       </div>
     </div>
@@ -309,6 +316,11 @@
 
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.style.transitionDelay=(e.target.dataset.d||0)+'ms';e.target.classList.add('in')}}),{threshold:.16});
   document.querySelectorAll('.reveal').forEach((el,i)=>{el.dataset.d=(i%3)*90;io.observe(el)});
+
+  // condense header after scrolling past the hero fold
+  const hdr=document.querySelector('header');
+  const onScroll=()=>hdr.classList.toggle('scrolled',window.scrollY>60);
+  onScroll();window.addEventListener('scroll',onScroll,{passive:true});
 </script>
 </body>
 </html>
