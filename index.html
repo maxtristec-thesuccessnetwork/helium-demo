@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Helium Studio — Web &amp; systems studio</title>
+<meta name="description" content="We take the weight off — so your business rises. Websites, systems and automation, diagnosed by a business analyst, then built.">
+<meta property="og:title" content="Helium Studio — Web & systems studio">
+<meta property="og:description" content="Diagnose first, then build. Websites, systems and automation for growing businesses.">
+<link rel="icon" href="assets/favicon.svg">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Hanken+Grotesk:wght@400..700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0D1522;--ink-1:#1C2129;--light:#F1F2F6;--mist:#9AA6B8;
+    --azure:#5B8DEF;--twilight:#7C73F0;--violet:#9B6CF0;
+    --grad:linear-gradient(135deg,#5B8DEF 0%,#7C73F0 50%,#9B6CF0 100%);
+    --card:#262D38;--card-2:#20262F;--border:rgba(255,255,255,.09);
+    --ease:cubic-bezier(.22,1,.36,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--ink);color:var(--light);font-family:"Hanken Grotesk",sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  h1,h2,h3{font-family:"Space Grotesk",sans-serif;letter-spacing:-.03em;line-height:1.06;font-weight:500}
+  .italic{font-style:italic;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .mono{font-family:"Space Mono",monospace;text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;color:var(--azure)}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+  a{color:inherit;text-decoration:none}
+
+  .logo{display:flex;align-items:center;gap:11px}
+  .tile-sm{width:32px;height:32px;border-radius:8px;background:var(--grad);position:relative;display:grid;place-items:center;box-shadow:0 6px 18px rgba(124,115,240,.35)}
+  .tile-sm span{font-family:"Space Grotesk";font-weight:600;color:#fff;font-size:1rem}
+  .tile-sm small{position:absolute;top:3px;left:6px;font-family:"Space Mono";font-size:.48rem;color:rgba(255,255,255,.75)}
+  .word{font-family:"Space Grotesk";font-weight:500;font-size:1.2rem;letter-spacing:-.035em}
+  .word b{color:var(--twilight)}
+
+  header{position:fixed;inset:0 0 auto 0;z-index:50;backdrop-filter:blur(14px);background:rgba(13,21,34,.55);border-bottom:1px solid var(--border)}
+  nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .nav-links{display:flex;gap:32px;align-items:center}
+  .nav-links a{font-size:.94rem;color:var(--mist);transition:color .3s}
+  .nav-links a:hover{color:#fff}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:100px;font-family:"Space Grotesk";font-weight:500;font-size:.94rem;transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+  .btn-grad{background:var(--grad);color:#fff;box-shadow:0 8px 24px rgba(124,115,240,.4);background-size:200% 200%;animation:shift 6s ease infinite}
+  .btn-grad:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(124,115,240,.6)}
+  .btn-ghost{border:1px solid var(--border)}
+  .btn-ghost:hover{border-color:var(--twilight)}
+  @media(max-width:820px){.nav-links a:not(.btn){display:none}}
+  @keyframes shift{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
+
+  /* HERO */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
+  .aurora{position:absolute;inset:0;z-index:0;filter:blur(90px);opacity:.55}
+  .blob{position:absolute;border-radius:50%}
+  .b1{width:620px;height:620px;background:radial-gradient(circle,#5B8DEF,transparent 70%);top:-180px;left:-120px;animation:float1 18s ease-in-out infinite}
+  .b2{width:560px;height:560px;background:radial-gradient(circle,#9B6CF0,transparent 70%);top:10%;right:-140px;animation:float2 22s ease-in-out infinite}
+  .b3{width:500px;height:500px;background:radial-gradient(circle,#7C73F0,transparent 70%);bottom:-160px;left:30%;animation:float3 20s ease-in-out infinite}
+  @keyframes float1{0%,100%{transform:translate(0,0)}50%{transform:translate(80px,60px)}}
+  @keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(-70px,50px)}}
+  @keyframes float3{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,-70px)}}
+  .grain{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at 50% 40%,transparent 30%,var(--ink) 85%)}
+  .hero .wrap{position:relative;z-index:2}
+  .he-lockup{display:flex;align-items:center;gap:16px;cursor:pointer;margin-bottom:34px}
+  .he-tile{width:64px;height:64px;border-radius:15px;background:var(--grad);position:relative;display:flex;align-items:center;justify-content:center;box-shadow:0 16px 40px rgba(124,115,240,.5);flex:none}
+  .he-tile small{position:absolute;top:9px;left:11px;font-family:"Space Mono";font-size:10px;color:rgba(255,255,255,.85)}
+  .he-tile b{font-family:"Space Grotesk";font-weight:600;font-size:29px;color:#fff}
+  .he-word{font-family:"Space Grotesk";font-weight:500;font-size:48px;letter-spacing:-.03em;line-height:1;display:flex;color:#fff}
+  .he-word span{display:inline-block;opacity:0}
+  .he-word i{display:inline-block;color:var(--twilight);font-style:normal;opacity:0}
+  .hero h1{font-size:clamp(3rem,8vw,6rem);max-width:15ch;font-weight:400;letter-spacing:-.04em}
+  .hero h1 em{font-style:normal;background:var(--grad);background-size:200% 200%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shift 6s ease infinite}
+  .hero p{font-size:clamp(1.1rem,2vw,1.45rem);color:var(--mist);max-width:52ch;margin-top:28px}
+  .hero .cta{display:flex;gap:16px;margin-top:44px;flex-wrap:wrap}
+
+  section{padding:110px 0}
+  .alt{background:var(--ink-1)}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-bottom:48px;flex-wrap:wrap}
+  .sec-head h2{font-size:clamp(2.2rem,5vw,3.6rem);max-width:18ch}
+  .sec-head p{color:var(--mist);max-width:42ch}
+
+  /* WORK grid (Griflan-style, work-first) */
+  .work-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:20px}
+  .case{position:relative;border-radius:22px;overflow:hidden;border:1px solid var(--border);min-height:340px;display:flex;align-items:flex-end;transition:transform .5s var(--ease);grid-column:span 3}
+  .case.wide{grid-column:span 4}.case.narrow{grid-column:span 2}
+  @media(max-width:860px){.case,.case.wide,.case.narrow{grid-column:span 6;min-height:300px}}
+  .case:hover{transform:translateY(-6px)}
+  .case .bg{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;transition:transform .8s var(--ease)}
+  .case:hover .bg{transform:scale(1.06)}
+  .case .bg.g1{background:var(--grad)}
+  .case .bg.g2{background:linear-gradient(135deg,#46566E,#0D1522)}
+  .case .bg.g3{background:linear-gradient(135deg,#2E86C7,#16344E)}
+  .case .scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(transparent 30%,rgba(13,21,34,.92))}
+  .case .body{position:relative;z-index:2;padding:30px}
+  .case .tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+  .case .tag{font-family:"Space Mono";font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);padding:5px 10px;border-radius:100px;backdrop-filter:blur(6px)}
+  .case h3{font-size:1.7rem;margin-bottom:6px}
+  .case p{color:#cfd6e2;font-size:.95rem;max-width:44ch}
+
+  /* RESULTS band (Griflan "You win. We grin.") */
+  .results h2{font-size:clamp(2.4rem,6vw,4.6rem);text-align:center;max-width:16ch;margin:0 auto 60px;font-weight:400}
+  .res-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  @media(max-width:860px){.res-grid{grid-template-columns:1fr}}
+  .res{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:34px;transition:transform .4s var(--ease),border-color .4s var(--ease)}
+  .res:hover{transform:translateY(-5px);border-color:rgba(124,115,240,.45)}
+  .res .big{font-family:"Space Grotesk";font-size:2.4rem;font-weight:500;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+  .res p{color:var(--mist);margin-top:12px;font-size:.98rem}
+
+  /* SERVICES */
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  @media(max-width:860px){.grid-3{grid-template-columns:1fr}}
+  .svc{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:30px;transition:transform .4s var(--ease),border-color .4s var(--ease)}
+  .svc:hover{transform:translateY(-5px);border-color:rgba(124,115,240,.45)}
+  .svc .ix{width:42px;height:42px;border-radius:10px;background:rgba(124,115,240,.14);display:grid;place-items:center;font-family:"Space Mono";color:var(--twilight);margin-bottom:18px}
+  .svc h3{font-size:1.3rem;margin-bottom:8px}
+  .svc p{color:var(--mist);font-size:.96rem}
+
+  /* CLIENTS wall */
+  .clients{text-align:center}
+  .client-wall{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 34px;max-width:900px;margin:0 auto}
+  .client-wall span{font-family:"Space Grotesk";font-weight:500;font-size:1.3rem;color:var(--mist);opacity:.8;transition:color .3s,opacity .3s}
+  .client-wall span:hover{color:#fff;opacity:1}
+
+  /* TESTIMONIALS */
+  .tcols{columns:3;column-gap:20px}
+  @media(max-width:860px){.tcols{columns:1}}
+  .quote{break-inside:avoid;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:28px;margin-bottom:20px}
+  .quote p{font-size:1rem;line-height:1.55}
+  .quote .who{margin-top:16px;font-family:"Space Mono";font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--twilight)}
+
+  /* MISSION */
+  .mission{text-align:center}
+  .mission h2{font-size:clamp(2rem,5vw,3.4rem);max-width:24ch;margin:0 auto;font-weight:400}
+  .mission p{color:var(--mist);max-width:46ch;margin:24px auto 0;font-size:1.15rem}
+
+  /* CONTACT */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start}
+  @media(max-width:820px){.contact-grid{grid-template-columns:1fr;gap:34px}}
+  form{display:flex;flex-direction:column;gap:16px}
+  .field{display:flex;flex-direction:column;gap:7px}
+  label{font-family:"Space Mono";font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mist)}
+  input,textarea{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;color:var(--light);font-family:"Hanken Grotesk";font-size:1rem;transition:border-color .3s}
+  input:focus,textarea:focus{outline:none;border-color:var(--twilight)}
+  textarea{min-height:120px;resize:vertical}
+
+  footer{border-top:1px solid var(--border);padding:50px 0;color:var(--mist);font-size:.9rem}
+  .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important}.he-word span,.he-word i{opacity:1}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap"><nav>
+    <a href="#" class="logo"><span class="tile-sm"><small>2</small><span>He</span></span><span class="word">helium<b>.</b></span></a>
+    <div class="nav-links">
+      <a href="#work">Work</a><a href="#services">Services</a><a href="#approach">Approach</a><a href="#contact">Contact</a>
+      <a href="#contact" class="btn btn-grad">Start a diagnosis</a>
+    </div>
+  </nav></div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="aurora"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span></div>
+    <div class="grain"></div>
+    <div class="wrap">
+      <div class="he-lockup" id="heLockup" title="Click to replay">
+        <div class="he-tile"><small>2</small><b>He</b></div>
+        <div class="he-word"><span>h</span><span>e</span><span>l</span><span>i</span><span>u</span><span>m</span><i>.</i></div>
+      </div>
+      <h1>We take the weight off — so your business <em>rises.</em></h1>
+      <p>We work with growing businesses that are tired of being held back by a slow site or manual busywork. Websites, systems and automation — diagnosed by a business analyst, then built.</p>
+      <div class="cta">
+        <a href="#contact" class="btn btn-grad">Start a diagnosis →</a>
+        <a href="#work" class="btn btn-ghost">See our work</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK (work-first, like Griflan) -->
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-head"><h2>Work that <span class="italic">earns its keep.</span></h2><p>Premium builds with real craft underneath — and a job to do for the business.</p></div>
+      <div class="work-grid">
+        <a class="case wide reveal"><div class="bg" style="background-image:url('assets/work-aquavistas.jpg')"></div><div class="scrim"></div><div class="body"><div class="tags"><span class="tag">Premium</span><span class="tag">Multi-page</span><span class="tag">CRM</span></div><h3>Aquavistas</h3><p>A fast, premium site with a filterable show catalogue and CRM-backed enquiry flow for a superyacht entertainment brand.</p></div></a>
+        <a class="case narrow reveal"><div class="bg g2"></div><div class="scrim"></div><div class="body"><div class="tags"><span class="tag">Motion</span><span class="tag">Interaction</span></div><h3>Motion With Intent</h3><p>The craft layer that makes a site feel alive.</p></div></a>
+        <a class="case narrow reveal"><div class="bg g3"></div><div class="scrim"></div><div class="body"><div class="tags"><span class="tag">Local</span><span class="tag">Lead-gen</span></div><h3>ResQ Tyres</h3><p>A fast, mobile-first site built to turn roadside emergencies into calls.</p></div></a>
+        <a class="case wide reveal"><div class="bg g1"></div><div class="scrim"></div><div class="body"><div class="tags"><span class="tag">Your business</span></div><h3>You're next.</h3><p>Tell us what's slowing you down — we'll diagnose it and show you what's worth building.</p></div></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS band -->
+  <section class="results alt">
+    <div class="wrap">
+      <h2>You <span class="italic">rise.</span> We grin<span class="italic">.</span></h2>
+      <div class="res-grid">
+        <div class="res reveal"><div class="big">More enquiries</div><p>Sites built to convert visitors into calls and leads — not just to look nice.</p></div>
+        <div class="res reveal"><div class="big">Less busywork</div><p>Automation that takes manual admin, follow-ups and bookings off your team's plate.</p></div>
+        <div class="res reveal"><div class="big">Look legit</div><p>A studio-grade brand and site that makes a growing business look like a serious one.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="wrap">
+      <div class="sec-head"><h2>One studio, the <span class="italic">whole lift.</span></h2><p>From the first diagnosis to the systems behind the scenes — joined-up, not bolted-on.</p></div>
+      <div class="grid-3">
+        <div class="svc reveal"><div class="ix">01</div><h3>Diagnose</h3><p>A focused business-analysis workshop to find the real bottleneck — before a line of code.</p></div>
+        <div class="svc reveal"><div class="ix">02</div><h3>Websites</h3><p>Fast, modern, conversion-focused sites that look like a serious business, on your own accounts.</p></div>
+        <div class="svc reveal"><div class="ix">03</div><h3>Systems &amp; automation</h3><p>Take the manual, repetitive work off your team — bookings, leads, follow-ups, admin.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPROACH -->
+  <section id="approach" class="alt">
+    <div class="wrap">
+      <div class="sec-head"><h2>Diagnose first, <span class="italic">then build.</span></h2><p>Most studios sell you a website. We're led by a business analyst, so we fix the actual problem — sometimes that's the website, sometimes it isn't.</p></div>
+    </div>
+  </section>
+
+  <!-- CLIENTS wall -->
+  <section class="clients">
+    <div class="wrap">
+      <span class="mono">Built with / for</span>
+      <div class="client-wall" style="margin-top:30px">
+        <span>Aquavistas</span><span>Motion With Intent</span><span>ResQ Tyres</span><span>Luxury Treasure Hunts</span><span>+ your business</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="alt">
+    <div class="wrap">
+      <div class="sec-head"><h2>Kind <span class="italic">words.</span></h2><p>Placeholder quotes for the demo — swap in real client words as they come.</p></div>
+      <div class="tcols">
+        <div class="quote reveal"><p>“They didn't start by selling us a website — they worked out what was actually losing us leads, then fixed it.”</p><div class="who">Placeholder · Service business</div></div>
+        <div class="quote reveal"><p>“Fast, calm and straight-talking. The site finally looks like the business we're trying to be.”</p><div class="who">Placeholder · Founder</div></div>
+        <div class="quote reveal"><p>“The automation alone gave us back a day a week. Worth it on that basis alone.”</p><div class="who">Placeholder · Operations</div></div>
+        <div class="quote reveal"><p>“One clear price, our own accounts, no lock-in. Refreshing after the last agency.”</p><div class="who">Placeholder · Owner</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION -->
+  <section class="mission">
+    <div class="wrap">
+      <h2>Helium is a <span class="italic">web &amp; systems studio</span> — calm and rigorous underneath, light on the surface.</h2>
+      <p>We remove the weight a business carries — waste, manual work, a site that holds it back — so it rises.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="alt">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div>
+          <span class="mono">Start a diagnosis</span>
+          <h2 style="font-size:clamp(1.9rem,4vw,2.8rem);margin:12px 0 16px;max-width:16ch">What's slowing your business down?</h2>
+          <p style="color:var(--mist);max-width:42ch">Tell us what's annoying you right now — it doesn't have to be "a website". We'll diagnose it and tell you straight what's worth doing.</p>
+          <p style="color:var(--mist);margin-top:22px">Or email <a href="mailto:hello@heliumstudio.co.uk" style="color:var(--twilight)">hello@heliumstudio.co.uk</a></p>
+        </div>
+        <form onsubmit="event.preventDefault();this.querySelector('.sent').style.display='block';">
+          <div class="field"><label>Name</label><input type="text" placeholder="Your name" required></div>
+          <div class="field"><label>Business</label><input type="text" placeholder="Business name"></div>
+          <div class="field"><label>Email</label><input type="email" placeholder="you@business.com" required></div>
+          <div class="field"><label>What's annoying your business?</label><textarea placeholder="Tell us the issue — leads, time, manual work, the website…"></textarea></div>
+          <button type="submit" class="btn btn-grad" style="justify-content:center">Start a diagnosis →</button>
+          <p class="sent" style="display:none;color:var(--twilight);font-size:.9rem">Thanks — this is a demo form, so nothing's sent yet. Email hello@heliumstudio.co.uk to reach us.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <a href="#" class="logo"><span class="tile-sm"><small>2</small><span>He</span></span><span class="word">helium<b>.</b></span></a>
+    <span>hello@heliumstudio.co.uk · Web &amp; systems studio</span>
+    <span>© 2026 Helium Studio</span>
+  </div>
+</footer>
+
+<script>
+  // Helium logo build animation (recreated from Helium Studio Logo Animation.html)
+  const EASE='cubic-bezier(.2,.85,.25,1)';
+  const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  function playHe(){
+    const stage=document.getElementById('heLockup');
+    const tile=stage.querySelector('.he-tile');
+    const letters=stage.querySelectorAll('.he-word span');
+    const dot=stage.querySelector('.he-word i');
+    if(reduce){letters.forEach(l=>l.style.opacity=1);dot.style.opacity=1;return;}
+    tile.getAnimations().forEach(a=>a.cancel());
+    tile.animate([{transform:'translateY(34px) scale(.66)'},{transform:'translateY(-7px) scale(1.05)',offset:.7},{transform:'translateY(0) scale(1)'}],{duration:720,delay:60,easing:EASE,fill:'forwards'});
+    letters.forEach((l,i)=>{l.getAnimations().forEach(a=>a.cancel());l.animate([{opacity:0,transform:'translateY(30px)',filter:'blur(4px)'},{opacity:1,transform:'translateY(0)',filter:'blur(0)'}],{duration:560,delay:260+i*55,easing:EASE,fill:'forwards'});});
+    const dd=260+letters.length*55;
+    dot.getAnimations().forEach(a=>a.cancel());
+    dot.animate([{opacity:0,transform:'translateY(-12px) scale(0)'},{opacity:1,transform:'translateY(3px) scale(1.32)',offset:.7},{opacity:1,transform:'translateY(0) scale(1)'}],{duration:520,delay:dd,easing:EASE,fill:'forwards'});
+    setTimeout(()=>{stage.animate([{transform:'translateY(0)'},{transform:'translateY(-8px)'},{transform:'translateY(0)'}],{duration:3800,iterations:Infinity,easing:'ease-in-out'});},dd+580);
+  }
+  document.getElementById('heLockup').addEventListener('click',playHe);
+  window.addEventListener('load',playHe);
+
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.style.transitionDelay=(e.target.dataset.d||0)+'ms';e.target.classList.add('in')}}),{threshold:.16});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{el.dataset.d=(i%3)*90;io.observe(el)});
+</script>
+</body>
+</html>
