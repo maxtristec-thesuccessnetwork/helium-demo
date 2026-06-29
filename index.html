@@ -153,7 +153,22 @@
   .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
   .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
   .reveal.in{opacity:1;transform:none}
-  @media(prefers-reduced-motion:reduce){*{animation:none!important}.he-word span,.he-word i{opacity:1}.reveal{opacity:1;transform:none}}
+
+  /* feature-card cursor parallax: hold scale constant so JS can translate */
+  .case.feat .bg{transform:scale(1.12);will-change:transform}
+  .case.feat:hover .bg{transform:scale(1.12)}
+
+  /* expanding contact pill */
+  .contact-pill{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);min-width:190px;height:54px;padding:0 26px;border-radius:999px;overflow:hidden;border:1px solid var(--border);background:rgba(13,21,34,.6);backdrop-filter:blur(12px);color:#fff;z-index:999;display:flex;align-items:center;justify-content:center;font-family:"Space Grotesk";font-weight:500;font-size:.92rem;transition:min-width .45s var(--ease),background .4s var(--ease),border-color .4s var(--ease),box-shadow .4s var(--ease)}
+  .contact-pill:hover{min-width:320px;box-shadow:0 14px 38px rgba(124,115,240,.45)}
+  .contact-pill.lit{background:var(--grad);border-color:transparent}
+  .pill-text{position:relative;height:1.25em;overflow:hidden;display:block}
+  .text-layer{display:flex;flex-direction:column;align-items:center;transition:transform .45s var(--ease)}
+  .text-layer span{height:1.25em;line-height:1.25;white-space:nowrap}
+  .contact-pill:hover .text-layer{transform:translateY(-1.25em)}
+  @media(max-width:600px){.contact-pill{display:none}}
+
+  @media(prefers-reduced-motion:reduce){*{animation:none!important}.he-word span,.he-word i{opacity:1}.reveal{opacity:1;transform:none}.contact-pill{transition:none}}
 </style>
 </head>
 <body>
@@ -190,9 +205,9 @@
   <!-- WORK (work-first, like Griflan) -->
   <section id="work">
     <div class="wrap">
-      <div class="sec-head"><h2>Work that <span class="italic">earns its keep.</span></h2><p>Premium builds with real craft underneath — and a job to do for the business.</p></div>
+      <div class="sec-head"><h2 class="fill">Work that <span class="italic">earns its keep.</span></h2><p>Premium builds with real craft underneath — and a job to do for the business.</p></div>
       <div class="work-grid">
-        <a class="case wide reveal"><div class="bg" style="background-image:url('assets/work-aquavistas.webp')"></div><div class="scrim"></div><div class="body"><div class="tags"><span class="tag">Premium</span><span class="tag">Multi-page</span><span class="tag">CRM</span></div><h3>Aquavistas</h3><p>A fast, premium site with a filterable show catalogue and CRM-backed enquiry flow for a superyacht entertainment brand.</p></div></a>
+        <a class="case wide reveal feat"><div class="bg" style="background-image:url('assets/work-aquavistas.webp')"></div><div class="scrim"></div><div class="body"><div class="tags"><span class="tag">Premium</span><span class="tag">Multi-page</span><span class="tag">CRM</span></div><h3>Aquavistas</h3><p>A fast, premium site with a filterable show catalogue and CRM-backed enquiry flow for a superyacht entertainment brand.</p></div></a>
         <a class="case narrow reveal"><div class="bg" style="background-image:url('assets/work-mwi.jpg')"></div><div class="scrim"></div><div class="body"><div class="tags"><span class="tag">Motion</span><span class="tag">Interaction</span></div><h3>Motion With Intent</h3><p>The craft layer that makes a site feel alive.</p></div></a>
         <a class="case narrow reveal"><div class="bg" style="background-image:url('assets/work-resq.jpg')"></div><div class="scrim"></div><div class="body"><div class="tags"><span class="tag">Local</span><span class="tag">Lead-gen</span></div><h3>ResQ Tyres</h3><p>A fast, mobile-first site built to turn roadside emergencies into calls.</p></div></a>
         <a class="case wide reveal"><div class="bg g1"></div><div class="scrim"></div><div class="body"><div class="tags"><span class="tag">Your business</span></div><h3>You're next.</h3><p>Tell us what's slowing you down — we'll diagnose it and show you what's worth building.</p></div></a>
@@ -203,7 +218,7 @@
   <!-- RESULTS band -->
   <section class="results alt">
     <div class="wrap">
-      <h2>You <span class="italic">rise.</span> We grin<span class="italic">.</span></h2>
+      <h2 class="fill">You <span class="italic">rise.</span> We grin<span class="italic">.</span></h2>
       <div class="res-grid">
         <div class="res reveal"><div class="big">More enquiries</div><p>Sites built to convert visitors into calls and leads — not just to look nice.</p></div>
         <div class="res reveal"><div class="big">Less busywork</div><p>Automation that takes manual admin, follow-ups and bookings off your team's plate.</p></div>
@@ -215,7 +230,7 @@
   <!-- SERVICES -->
   <section id="services">
     <div class="wrap">
-      <div class="sec-head"><h2>One studio, the <span class="italic">whole lift.</span></h2><p>From the first diagnosis to the systems behind the scenes — joined-up, not bolted-on.</p></div>
+      <div class="sec-head"><h2 class="fill">One studio, the <span class="italic">whole lift.</span></h2><p>From the first diagnosis to the systems behind the scenes — joined-up, not bolted-on.</p></div>
       <div class="grid-3">
         <div class="svc reveal"><div class="ix">01</div><h3>Diagnose</h3><p>A focused business-analysis workshop to find the real bottleneck — before a line of code.</p></div>
         <div class="svc reveal"><div class="ix">02</div><h3>Websites</h3><p>Fast, modern, conversion-focused sites that look like a serious business, on your own accounts.</p></div>
@@ -227,7 +242,7 @@
   <!-- APPROACH -->
   <section id="approach" class="alt">
     <div class="wrap">
-      <div class="sec-head"><h2>Diagnose first, <span class="italic">then build.</span></h2><p>Most studios sell you a website. We're led by a business analyst, so we fix the actual problem — sometimes that's the website, sometimes it isn't.</p></div>
+      <div class="sec-head"><h2 class="fill">Diagnose first, <span class="italic">then build.</span></h2><p>Most studios sell you a website. We're led by a business analyst, so we fix the actual problem — sometimes that's the website, sometimes it isn't.</p></div>
     </div>
   </section>
 
@@ -293,6 +308,14 @@
   </div>
 </footer>
 
+<a class="contact-pill" href="mailto:hello@heliumstudio.co.uk" aria-label="Contact Helium Studio">
+  <span class="pill-text"><span class="text-layer"><span>Start a diagnosis</span><span>hello@heliumstudio.co.uk</span></span></span>
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.16/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
 <script>
   // Helium logo build animation (recreated from Helium Studio Logo Animation.html)
   const EASE='cubic-bezier(.2,.85,.25,1)';
@@ -314,13 +337,63 @@
   document.getElementById('heLockup').addEventListener('click',playHe);
   window.addEventListener('load',playHe);
 
-  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.style.transitionDelay=(e.target.dataset.d||0)+'ms';e.target.classList.add('in')}}),{threshold:.16});
-  document.querySelectorAll('.reveal').forEach((el,i)=>{el.dataset.d=(i%3)*90;io.observe(el)});
-
   // condense header after scrolling past the hero fold
   const hdr=document.querySelector('header');
   const onScroll=()=>hdr.classList.toggle('scrolled',window.scrollY>60);
   onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+
+  const reveals=document.querySelectorAll('.reveal');
+
+  // Scroll reveals — always run, dependency-free (so content is never stuck hidden)
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.style.transitionDelay=(e.target.dataset.d||0)+'ms';e.target.classList.add('in')}}),{threshold:.16});
+  reveals.forEach((el,i)=>{el.dataset.d=(i%3)*90;io.observe(el)});
+
+  // Enhanced motion only when allowed AND the libraries actually loaded
+  if(!reduce && window.Lenis && window.gsap && window.ScrollTrigger){ try {
+    // --- Foundation: Lenis smooth scroll ---
+    const lenis=new Lenis({smoothWheel:true});
+    function raf(t){lenis.raf(t);requestAnimationFrame(raf);}
+    requestAnimationFrame(raf);
+    gsap.registerPlugin(ScrollTrigger);
+    lenis.on('scroll',ScrollTrigger.update);
+    // in-page anchor links scroll smoothly via Lenis
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{const id=a.getAttribute('href');if(id.length>1){const t=document.querySelector(id);if(t){e.preventDefault();lenis.scrollTo(t,{offset:-72});}}});
+    });
+
+    // --- Hero entrance ---
+    gsap.from('.hero h1',{opacity:0,y:50,duration:1.1,ease:'power3.out',delay:.1});
+    gsap.from('.hero p',{opacity:0,y:30,duration:1,ease:'power3.out',delay:.45});
+    gsap.from('.hero .cta',{opacity:0,y:24,duration:.9,ease:'power3.out',delay:.7});
+
+    // --- Scroll-fill headings (preserve .italic gradient children) ---
+    const DIM='rgba(241,242,246,.22)', LIT='#F1F2F6';
+    document.querySelectorAll('.fill').forEach(el=>{
+      const nodes=[...el.childNodes], spans=[]; el.innerHTML='';
+      nodes.forEach(node=>{
+        if(node.nodeType===3){ [...node.textContent].forEach(ch=>{const s=document.createElement('span');s.textContent=ch;s.style.color=DIM;el.appendChild(s);spans.push(s);}); }
+        else { el.appendChild(node); } // keep .italic gradient spans intact
+      });
+      ScrollTrigger.create({trigger:el,start:'top 88%',end:'top 42%',scrub:true,
+        onUpdate:self=>{const n=Math.round(self.progress*spans.length);spans.forEach((s,i)=>{s.style.color=i<n?LIT:DIM;});}});
+    });
+
+    // --- Cursor parallax on the feature image (desktop pointers only) ---
+    if(matchMedia('(pointer:fine)').matches){
+      const feat=document.querySelector('.case.feat');
+      if(feat){
+        const bg=feat.querySelector('.bg'); let tx=0,ty=0,cx=0,cy=0;
+        feat.addEventListener('mousemove',e=>{const b=feat.getBoundingClientRect();tx=(e.clientX-b.left)/b.width-.5;ty=(e.clientY-b.top)/b.height-.5;});
+        feat.addEventListener('mouseleave',()=>{tx=0;ty=0;});
+        gsap.ticker.add(()=>{cx+=(tx-cx)*.08;cy+=(ty-cy)*.08;gsap.set(bg,{x:cx*-30,y:cy*-30,scale:1.12});});
+      }
+    }
+
+    // --- Contact pill: light up once Work scrolls into view ---
+    const pill=document.querySelector('.contact-pill');
+    if(pill) ScrollTrigger.create({trigger:'#work',start:'top 80%',
+      onEnter:()=>pill.classList.add('lit'),onLeaveBack:()=>pill.classList.remove('lit')});
+  } catch(e){ console.warn('motion init failed:',e); } }
 </script>
 </body>
 </html>
