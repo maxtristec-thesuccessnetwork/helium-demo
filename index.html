@@ -21,7 +21,8 @@
     --ease:cubic-bezier(.22,1,.36,1);
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
+  /* native smooth-scroll only when motion libs aren't driving it (reduced-motion path) */
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:smooth}}
   body{background:var(--ink);color:var(--light);font-family:"Hanken Grotesk",sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
   h1,h2,h3{font-family:"Space Grotesk",sans-serif;letter-spacing:-.03em;line-height:1.06;font-weight:500}
   .italic{font-style:italic;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
@@ -350,12 +351,12 @@
 
   // Enhanced motion only when allowed AND the libraries actually loaded
   if(!reduce && window.Lenis && window.gsap && window.ScrollTrigger){ try {
-    // --- Foundation: Lenis smooth scroll ---
-    const lenis=new Lenis({smoothWheel:true});
-    function raf(t){lenis.raf(t);requestAnimationFrame(raf);}
-    requestAnimationFrame(raf);
+    // --- Foundation: Lenis smooth scroll, driven on GSAP's single ticker ---
     gsap.registerPlugin(ScrollTrigger);
+    const lenis=new Lenis({lerp:0.1, smoothWheel:true});
     lenis.on('scroll',ScrollTrigger.update);
+    gsap.ticker.add(t=>lenis.raf(t*1000));   // one loop, synced with GSAP — no desync lag
+    gsap.ticker.lagSmoothing(0);
     // in-page anchor links scroll smoothly via Lenis
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
       a.addEventListener('click',e=>{const id=a.getAttribute('href');if(id.length>1){const t=document.querySelector(id);if(t){e.preventDefault();lenis.scrollTo(t,{offset:-72});}}});
