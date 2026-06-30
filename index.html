@@ -28,7 +28,11 @@
   h1,h2,h3{font-family:"Space Grotesk",sans-serif;letter-spacing:-.03em;line-height:1.06;font-weight:500}
   .italic{font-style:italic;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
   .mono{font-family:"Space Mono",monospace;text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;color:var(--azure)}
-  .wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+  .wrap{width:min(92vw,1760px);margin:0 auto}
+  /* gently scale type + spacing up on large screens so wide layouts stay full, not sparse */
+  @media(min-width:1700px){html{font-size:17.5px}}
+  @media(min-width:2200px){html{font-size:19px}}
+  @media(min-width:2800px){html{font-size:20.5px}}
   a{color:inherit;text-decoration:none}
 
   .logo{display:flex;align-items:center;gap:11px}
@@ -71,7 +75,7 @@
   .he-word{font-family:"Space Grotesk";font-weight:500;font-size:48px;letter-spacing:-.03em;line-height:1;display:flex;color:#fff}
   .he-word span{display:inline-block;opacity:0}
   .he-word i{display:inline-block;color:var(--twilight);font-style:normal;opacity:0}
-  .hero h1{font-size:clamp(3rem,8vw,6rem);max-width:15ch;font-weight:400;letter-spacing:-.04em}
+  .hero h1{font-size:clamp(3rem,7.5vw,7.2rem);max-width:16ch;font-weight:400;letter-spacing:-.04em}
   .hero h1 em{font-style:normal;background:var(--grad);background-size:200% 200%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shift 6s ease infinite}
   .hero p{font-size:clamp(1.1rem,2vw,1.45rem);color:var(--mist);max-width:44ch;margin-top:26px}
   .hero .cta{display:flex;gap:16px;margin-top:40px;flex-wrap:wrap}
@@ -100,8 +104,8 @@
   .work-head h2{font-size:clamp(2rem,4.5vw,3.4rem);max-width:16ch;margin-top:10px}
   .carousel-container{width:100%;height:100vh;overflow:hidden;display:flex;align-items:center}
   .carousel-track{display:flex;gap:30px;padding:0 8vw;will-change:transform}
-  .carousel-item{flex:0 0 auto;width:min(34vw,400px);will-change:transform}
-  .carousel-item .ph{width:100%;height:60vh;border-radius:18px;overflow:hidden;position:relative;background:var(--card)}
+  .carousel-item{flex:0 0 auto;width:clamp(300px,30vw,520px);will-change:transform}
+  .carousel-item .ph{width:100%;height:min(62vh,720px);border-radius:18px;overflow:hidden;position:relative;background:var(--card)}
   .carousel-item .ph img{width:100%;height:100%;object-fit:cover}
   .carousel-item .ph.grad{background:var(--grad);display:flex;align-items:center;justify-content:center;text-align:center}
   .carousel-item .ph.grad span{font-family:"Space Grotesk";font-weight:500;font-size:1.6rem;color:#fff;padding:24px}
@@ -124,7 +128,7 @@
   .cube-head{text-align:center;margin-bottom:7vh;padding:0 6vw}
   .cube-head h2{font-size:clamp(2rem,4.5vw,3.2rem);margin-top:10px}
   .cube-wrap{perspective:1000px;transform-style:preserve-3d}
-  .cube{--cs:min(62vw,340px);width:var(--cs);height:var(--cs);position:relative;transform-style:preserve-3d;transform:rotateX(-25deg) rotateY(35deg);will-change:transform}
+  .cube{--cs:clamp(280px,42vw,520px);width:var(--cs);height:var(--cs);position:relative;transform-style:preserve-3d;transform:rotateX(-25deg) rotateY(35deg);will-change:transform}
   .face{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;backface-visibility:hidden;border-radius:16px;background:var(--grad);color:#fff;font-family:"Space Grotesk";font-weight:500;font-size:clamp(1.1rem,2.4vw,1.6rem);padding:18px;box-shadow:0 24px 80px rgba(124,115,240,.25)}
   .face.alt2{background:linear-gradient(315deg,#5B8DEF,#9B6CF0)}
   .face.dark{background:var(--ink);border:1px solid var(--border)}
