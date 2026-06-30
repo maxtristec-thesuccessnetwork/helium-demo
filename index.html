@@ -124,11 +124,11 @@
   .res p{color:var(--mist);margin-top:12px;font-size:.98rem}
 
   /* SERVICES — 3D cube */
-  .cube-section{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;perspective:1000px;background:var(--ink-1);overflow:hidden}
-  .cube-head{text-align:center;margin-bottom:7vh;padding:0 6vw}
+  .cube-section{height:100vh;display:flex;flex-direction:column;align-items:center;perspective:1000px;background:var(--ink-1);overflow:hidden}
+  .cube-head{text-align:center;padding:12vh 6vw 0;position:relative;z-index:10}
   .cube-head h2{font-size:clamp(2rem,4.5vw,3.2rem);margin-top:10px}
-  .cube-wrap{perspective:1000px;transform-style:preserve-3d}
-  .cube{--cs:clamp(280px,42vw,520px);width:var(--cs);height:var(--cs);position:relative;transform-style:preserve-3d;transform:rotateX(-25deg) rotateY(35deg);will-change:transform}
+  .cube-wrap{flex:1;display:flex;align-items:center;justify-content:center;perspective:1000px;transform-style:preserve-3d}
+  .cube{--cs:clamp(260px,36vw,440px);width:var(--cs);height:var(--cs);position:relative;transform-style:preserve-3d;transform:rotateX(-25deg) rotateY(35deg);will-change:transform}
   .face{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;backface-visibility:hidden;border-radius:16px;background:var(--grad);color:#fff;font-family:"Space Grotesk";font-weight:600;font-size:clamp(1.3rem,2.7vw,2rem);letter-spacing:-.01em;padding:18px;text-shadow:0 2px 20px rgba(0,0,0,.45);box-shadow:0 24px 80px rgba(124,115,240,.25)}
   .face.alt2{background:linear-gradient(315deg,#5B8DEF,#9B6CF0)}
   .face.dark{background:#2B3340;border:1px solid rgba(255,255,255,.14)}
