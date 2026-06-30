@@ -114,6 +114,23 @@
   .carousel-item .cap em{font-family:"Space Mono";font-style:normal;font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--azure);align-self:center}
   .work-note{text-align:center;color:#46566E;font-size:.84rem;padding:0 6vw 10vh;font-family:"Space Mono";letter-spacing:.1em;text-transform:uppercase}
 
+  /* BEFORE / AFTER (ResQ uplift) */
+  .ba-wrap{padding:90px 0}
+  .ba{position:relative;width:100%;aspect-ratio:16/10;border-radius:20px;overflow:hidden;border:1px solid var(--border);cursor:ew-resize;user-select:none;box-shadow:0 30px 80px rgba(0,0,0,.45);touch-action:pan-y;margin-top:40px}
+  .ba-layer{position:absolute;inset:0;background-size:cover;background-position:top center;background-repeat:no-repeat}
+  .ba-before{background-color:#e9eaec;background-image:url('assets/resq-old.jpg')}
+  .ba-after{background-color:#11202e;background-image:url('assets/resq-new.jpg');clip-path:inset(0 0 0 calc(var(--p,50)*1%))}
+  .ba-tag{position:absolute;top:18px;z-index:6;font-family:"Space Mono";font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;padding:7px 13px;border-radius:100px;background:rgba(13,21,34,.6);backdrop-filter:blur(8px);border:1px solid var(--border)}
+  .ba-tag.before{left:18px;color:var(--mist)}
+  .ba-tag.after{right:18px;color:#fff;background:rgba(124,115,240,.35);border-color:transparent}
+  .ba-divider{position:absolute;top:0;bottom:0;left:calc(var(--p,50)*1%);width:2px;background:#fff;z-index:7;transform:translateX(-1px);box-shadow:0 0 18px rgba(255,255,255,.5)}
+  .ba-handle{position:absolute;top:50%;left:calc(var(--p,50)*1%);transform:translate(-50%,-50%);z-index:8;width:52px;height:52px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 26px rgba(124,115,240,.6);color:#fff}
+  .ba-handle::before{content:"⟨ ⟩";letter-spacing:-2px;font-family:"Space Mono"}
+  .ba-gains{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+  .ba-gain{border:1px solid var(--border);border-radius:100px;padding:9px 18px;font-size:.9rem;color:var(--mist)}
+  .ba-gain b{color:var(--light);font-family:"Space Grotesk";font-weight:500}
+  .ba-hint{text-align:center;margin-top:16px;color:#46566E;font-family:"Space Mono";font-size:.68rem;letter-spacing:.12em;text-transform:uppercase}
+
   /* RESULTS band */
   .results h2{font-size:clamp(2.4rem,6vw,4.6rem);text-align:center;max-width:16ch;margin:0 auto 60px;font-weight:400}
   .res-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -239,6 +256,28 @@
       </div>
     </div>
     <p class="work-note">Scroll-driven · momentum · proximity scale &amp; rotate</p>
+  </section>
+
+  <!-- BEFORE / AFTER — ResQ uplift -->
+  <section class="ba-section">
+    <div class="wrap ba-wrap">
+      <div class="sec-head"><div><span class="mono">Before / after</span><h2 class="fill">ResQ Tyres, <span class="italic">re-lifted.</span></h2></div><p>Same business, transformed. Drag the handle — or let it sweep — to see the old site become the new one.</p></div>
+      <div class="ba" id="ba" style="--p:50">
+        <div class="ba-layer ba-before"></div>
+        <div class="ba-layer ba-after"></div>
+        <span class="ba-tag before">Old site</span>
+        <span class="ba-tag after">New build</span>
+        <div class="ba-divider"></div>
+        <div class="ba-handle" role="slider" aria-label="Reveal before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0"></div>
+      </div>
+      <p class="ba-hint">Drag · or use ← → keys</p>
+      <div class="ba-gains">
+        <span class="ba-gain"><b>Faster</b> load</span>
+        <span class="ba-gain"><b>Mobile-first</b> layout</span>
+        <span class="ba-gain">Clear <b>call-now</b> CTA</span>
+        <span class="ba-gain"><b>Modern</b> brand</span>
+      </div>
+    </div>
   </section>
 
   <!-- RESULTS band -->
@@ -375,6 +414,20 @@
 
   // reduced-motion / no-libs fallback: make the work carousel natively scrollable
   if(reduce || !window.gsap){const c=document.querySelector('.carousel-container');if(c){c.style.overflowX='auto';c.style.height='auto';c.style.padding='12vh 0';}}
+
+  // Before/after slider — drag + keyboard always; gentle auto-sweep unless reduced motion
+  (function(){
+    const ba=document.getElementById('ba'); if(!ba) return;
+    const handle=ba.querySelector('.ba-handle');
+    let dragging=false, auto=true;
+    const set=p=>{p=Math.max(0,Math.min(100,p));ba.style.setProperty('--p',p);handle.setAttribute('aria-valuenow',Math.round(p));};
+    const fromEvent=e=>{const r=ba.getBoundingClientRect();const x=(e.touches?e.touches[0].clientX:e.clientX)-r.left;set(x/r.width*100);};
+    ba.addEventListener('pointerdown',e=>{dragging=true;auto=false;fromEvent(e);});
+    window.addEventListener('pointermove',e=>{if(dragging)fromEvent(e);});
+    window.addEventListener('pointerup',()=>dragging=false);
+    handle.addEventListener('keydown',e=>{const cur=parseFloat(getComputedStyle(ba).getPropertyValue('--p'))||50;if(e.key==='ArrowLeft'){auto=false;set(cur-4);}if(e.key==='ArrowRight'){auto=false;set(cur+4);}});
+    if(!reduce){let t=0;(function loop(){if(auto){t+=0.012;set(50+Math.sin(t)*38);}requestAnimationFrame(loop);})();} else set(50);
+  })();
 
   if(!reduce && window.Lenis && window.gsap && window.ScrollTrigger){ try {
     gsap.registerPlugin(ScrollTrigger);
