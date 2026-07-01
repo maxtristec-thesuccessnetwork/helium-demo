@@ -68,10 +68,16 @@
   @keyframes float3{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,-70px)}}
   .grain{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at 50% 40%,transparent 30%,var(--ink) 85%)}
   .hero .wrap{position:relative;z-index:2}
+  .he-caption{font-family:"Space Mono";text-transform:uppercase;letter-spacing:.2em;font-size:.66rem;color:var(--mist);margin-bottom:26px}
   .he-lockup{display:flex;align-items:center;gap:16px;cursor:pointer;margin-bottom:34px}
-  .he-tile{width:64px;height:64px;border-radius:15px;background:var(--grad);position:relative;display:flex;align-items:center;justify-content:center;box-shadow:0 16px 40px rgba(124,115,240,.5);flex:none}
-  .he-tile small{position:absolute;top:9px;left:11px;font-family:"Space Mono";font-size:10px;color:rgba(255,255,255,.85)}
-  .he-tile b{font-family:"Space Grotesk";font-weight:600;font-size:29px;color:#fff}
+  /* white 'ink' tile — matches the logo animation */
+  .he-tile{width:64px;height:64px;border-radius:15px;background:#fff;position:relative;display:flex;align-items:center;justify-content:center;box-shadow:0 16px 44px rgba(0,0,0,.35);flex:none}
+  .he-tile small{position:absolute;top:9px;left:11px;font-family:"Space Mono";font-size:10px;color:var(--twilight)}
+  .he-tile b{font-family:"Space Grotesk";font-weight:600;font-size:29px;color:#0D1522}
+  /* rising helium bubbles */
+  .he-bubbles{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+  .he-bubbles span{position:absolute;bottom:64px;border-radius:50%}
+  @keyframes heDrift{0%{transform:translateY(60px);opacity:0}18%{opacity:.5}100%{transform:translateY(-46vh);opacity:0}}
   .he-word{font-family:"Space Grotesk";font-weight:500;font-size:48px;letter-spacing:-.03em;line-height:1;display:flex;color:#fff}
   .he-word span{display:inline-block;opacity:0}
   .he-word i{display:inline-block;color:var(--twilight);font-style:normal;opacity:0}
@@ -282,7 +288,16 @@
   <section class="hero">
     <div class="aurora"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span></div>
     <div class="grain"></div>
+    <div class="he-bubbles">
+      <span style="left:22%;width:7px;height:7px;background:rgba(140,150,180,.55);animation:heDrift 7s ease-in infinite"></span>
+      <span style="left:42%;width:9px;height:9px;background:rgba(124,115,240,.4);animation:heDrift 8.5s ease-in infinite;animation-delay:3s"></span>
+      <span style="left:60%;width:5px;height:5px;background:rgba(140,150,180,.5);animation:heDrift 7.5s ease-in infinite;animation-delay:1.4s"></span>
+      <span style="left:74%;width:6px;height:6px;background:rgba(140,150,180,.5);animation:heDrift 7s ease-in infinite;animation-delay:2.2s"></span>
+      <span style="left:33%;width:5px;height:5px;background:rgba(124,115,240,.35);animation:heDrift 9s ease-in infinite;animation-delay:4.2s"></span>
+      <span style="left:86%;width:8px;height:8px;background:rgba(140,150,180,.45);animation:heDrift 8s ease-in infinite;animation-delay:.6s"></span>
+    </div>
     <div class="wrap">
+      <div class="he-caption">He · atomic no. 2 · the lift</div>
       <div class="he-lockup" id="heLockup" title="Click to replay">
         <div class="he-tile"><small>2</small><b>He</b></div>
         <div class="he-word"><span>h</span><span>e</span><span>l</span><span>i</span><span>u</span><span>m</span><i>.</i></div>
