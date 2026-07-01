@@ -226,13 +226,15 @@
   .toolkit-band{padding:66px 0;background:var(--ink);border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden}
   .toolkit-band .lead{text-align:center;margin-bottom:32px}
   .marq{display:flex;flex-direction:column;gap:16px}
-  .marq-row{display:flex;gap:14px;width:max-content;will-change:transform}
-  .marq-row.a{animation:marqA 40s linear infinite}
-  .marq-row.b{animation:marqB 46s linear infinite}
+  .marq-row{display:flex;gap:30px;width:max-content;will-change:transform}
+  .marq-row.a{animation:marqA 64s linear infinite}
+  .marq-row.b{animation:marqB 78s linear infinite}
   @keyframes marqA{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   @keyframes marqB{from{transform:translateX(-50%)}to{transform:translateX(0)}}
-  .chip{flex:0 0 auto;display:inline-flex;align-items:center;gap:9px;padding:11px 20px;border:1px solid var(--border);border-radius:100px;font-family:"Space Grotesk";font-weight:500;font-size:1rem;color:var(--light);background:rgba(255,255,255,.02)}
-  .chip::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--twilight)}
+  /* clean flowing text ticker — cooler than boxed pills, calmer */
+  .chip{flex:0 0 auto;display:inline-flex;align-items:center;gap:14px;padding:0 4px;font-family:"Space Grotesk";font-weight:500;font-size:clamp(1.15rem,1.7vw,1.7rem);letter-spacing:-.015em;color:var(--light)}
+  .chip::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--twilight);opacity:.9}
+  .chip.cap-chip{color:var(--mist)}
   .chip.cap-chip::before{background:var(--azure)}
 
   /* Web design — spotlight + code editor */
@@ -263,7 +265,7 @@
     <a href="#" class="logo"><span class="tile-sm"><small>2</small><span>He</span></span><span class="word">helium<b>.</b></span></a>
     <div class="nav-links">
       <a href="#work">Work</a><a href="#services">Services</a><a href="#approach">Approach</a><a href="#contact">Contact</a>
-      <a href="#contact" class="btn btn-grad">Start a diagnosis</a>
+      <a href="#contact" class="btn btn-grad">Let's rise</a>
     </div>
   </nav></div>
 </header>
@@ -281,7 +283,7 @@
       <h1>We take the weight off — so your business <em>rises.</em></h1>
       <p>Websites, systems and automation for growing businesses — diagnosed by a business analyst, then built.</p>
       <div class="cta">
-        <a href="#contact" class="btn btn-grad">Start a diagnosis →</a>
+        <a href="#contact" class="btn btn-grad">Let's rise →</a>
         <a href="#work" class="btn btn-ghost">See our work</a>
       </div>
       <a href="#work" class="scrollcue" aria-label="Scroll to work"><span></span>Scroll</a>
@@ -305,7 +307,7 @@
         <div class="carousel-item"><div class="ph"><img src="assets/work-mwi.jpg" alt="Motion With Intent"></div><div class="cap"><b>Motion With Intent</b><em>Motion</em></div></div>
         <div class="carousel-item"><div class="ph"><img src="assets/work-resq.jpg" alt="ResQ Tyres"></div><div class="cap"><b>ResQ Tyres</b><em>Local · Lead-gen</em></div></div>
         <div class="carousel-item"><div class="ph"><img src="assets/work-aquavistas-2.webp" alt="Aquavistas show catalogue"></div><div class="cap"><b>Aquavistas</b><em>Show catalogue</em></div></div>
-        <div class="carousel-item"><div class="ph grad"><span>You're next.</span></div><div class="cap"><b>Your business</b><em>Start a diagnosis</em></div></div>
+        <div class="carousel-item"><div class="ph grad"><span>You're next.</span></div><div class="cap"><b>Your business</b><em>Let's rise</em></div></div>
       </div>
     </div>
     <p class="work-note">Scroll-driven · momentum · proximity scale &amp; rotate</p>
@@ -460,7 +462,7 @@
     <div class="wrap">
       <div class="contact-grid">
         <div>
-          <span class="mono">Start a diagnosis</span>
+          <span class="mono">Let's rise</span>
           <h2 style="font-size:clamp(1.9rem,4vw,2.8rem);margin:12px 0 16px;max-width:16ch">What's slowing your business down?</h2>
           <p style="color:var(--mist);max-width:42ch">Tell us what's annoying you right now — it doesn't have to be "a website". We'll diagnose it and tell you straight what's worth doing.</p>
           <p style="color:var(--mist);margin-top:22px">Or email <a href="mailto:hello@heliumstudio.co.uk" style="color:var(--twilight)">hello@heliumstudio.co.uk</a></p>
@@ -470,7 +472,7 @@
           <div class="field"><label>Business</label><input type="text" placeholder="Business name"></div>
           <div class="field"><label>Email</label><input type="email" placeholder="you@business.com" required></div>
           <div class="field"><label>What's annoying your business?</label><textarea placeholder="Tell us the issue — leads, time, manual work, the website…"></textarea></div>
-          <button type="submit" class="btn btn-grad" style="justify-content:center">Start a diagnosis →</button>
+          <button type="submit" class="btn btn-grad" style="justify-content:center">Let's rise →</button>
           <p class="sent" style="display:none;color:var(--twilight);font-size:.9rem">Thanks — this is a demo form, so nothing's sent yet. Email hello@heliumstudio.co.uk to reach us.</p>
         </form>
       </div>
@@ -487,7 +489,7 @@
 </footer>
 
 <a class="contact-pill" href="mailto:hello@heliumstudio.co.uk" aria-label="Contact Helium Studio">
-  <span class="pill-text"><span class="text-layer"><span>Start a diagnosis</span><span>hello@heliumstudio.co.uk</span></span></span>
+  <span class="pill-text"><span class="text-layer"><span>Let's rise</span><span>hello@heliumstudio.co.uk</span></span></span>
 </a>
 
 <script>
@@ -584,8 +586,8 @@
         items.forEach(item=>{
           const r=item.getBoundingClientRect();
           const dist=(r.left+r.width/2)-focusX;
-          const norm=Math.min(Math.abs(dist)/520,1);
-          gsap.set(item,{y:norm*26,scale:1-norm*0.18,rotate:gsap.utils.clamp(-12,12,dist*0.025)});
+          const norm=Math.min(Math.abs(dist)/620,1);
+          gsap.set(item,{scale:1-norm*0.06});   // gentle depth only — no rotate/jump
         });
       });
     }
