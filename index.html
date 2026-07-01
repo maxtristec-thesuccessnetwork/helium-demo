@@ -256,6 +256,13 @@
   .editor .caret{display:inline-block;width:8px;height:1.05em;background:var(--twilight);vertical-align:-2px;animation:blink 1s steps(1) infinite}
   @keyframes blink{50%{opacity:0}}
 
+  /* Holdens-style repeated section label */
+  .rep{display:block;font-family:"Space Grotesk";font-weight:600;font-size:clamp(1.3rem,2.6vw,2.1rem);letter-spacing:-.02em;line-height:1;color:rgba(241,242,246,.09);white-space:nowrap;overflow:hidden;margin-bottom:14px}
+  .rep b{font-weight:600;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  /* capability sub-service list */
+  .cap-list{list-style:none;margin-top:16px;display:flex;flex-wrap:wrap;gap:8px}
+  .cap-list li{font-family:"Space Mono";font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mist);border:1px solid var(--border);border-radius:100px;padding:5px 11px}
+
   @media(prefers-reduced-motion:reduce){*{animation:none!important}.he-word span,.he-word i{opacity:1}.reveal{opacity:1;transform:none}.contact-pill{transition:none}html{scroll-behavior:smooth}.cube{transform:rotateX(-18deg) rotateY(28deg)}}
 </style>
 </head>
@@ -281,7 +288,7 @@
         <div class="he-word"><span>h</span><span>e</span><span>l</span><span>i</span><span>u</span><span>m</span><i>.</i></div>
       </div>
       <h1>We take the weight off — so your business <em>rises.</em></h1>
-      <p>Websites, systems and automation for growing businesses — diagnosed by a business analyst, then built.</p>
+      <p>We partner with ambitious businesses to move faster — websites, systems and automation, diagnosed by a business analyst, then built to scale.</p>
       <div class="cta">
         <a href="#contact" class="btn btn-grad">Let's rise →</a>
         <a href="#work" class="btn btn-ghost">See our work</a>
@@ -300,7 +307,7 @@
 
   <!-- WORK — momentum carousel -->
   <section id="work" class="work-section">
-    <div class="work-head"><div class="wrap"><span class="mono">Selected work</span><h2>Scroll through the <span class="italic">work.</span></h2></div></div>
+    <div class="work-head"><div class="wrap"><span class="rep">Work &nbsp;Work &nbsp;<b>Work</b>&nbsp; Work &nbsp;Work</span><span class="mono">Selected work</span><h2>Scroll through the <span class="italic">work.</span></h2></div></div>
     <div class="carousel-container">
       <div class="carousel-track">
         <div class="carousel-item"><div class="ph"><img src="assets/work-aquavistas.webp" alt="Aquavistas"></div><div class="cap"><b>Aquavistas</b><em>Premium · CRM</em></div></div>
@@ -350,11 +357,12 @@
   <!-- WHAT WE DO — capability cards -->
   <section id="whatwedo">
     <div class="wrap">
-      <div class="sec-head"><div><span class="mono">What we do</span><h2 class="fill">Design follows the <span class="italic">business.</span></h2></div><p>We start by understanding your goals. The design and build come second — not the other way around.</p></div>
+      <span class="rep">What we do &nbsp;What we do &nbsp;<b>What we do</b>&nbsp; What we do &nbsp;What we do</span>
+      <div class="sec-head"><div><span class="mono">What we do</span><h2 class="fill">Design follows the <span class="italic">business.</span></h2></div><p>Impact matters as much as ideas. Everything we make is creatively driven — but measurable and scalable too.</p></div>
       <div class="cap-grid">
-        <article class="cap reveal"><div class="cap-cover"><span class="cdot"></span><span class="num">01</span></div><div class="cap-body"><h3>Digital</h3><p>Web design and development, built for performance, clarity and long-term ownership — on your own accounts, no lock-in.</p></div></article>
-        <article class="cap reveal"><div class="cap-cover g2"><span class="cdot"></span><span class="num">02</span></div><div class="cap-body"><h3>Brand Identity</h3><p>A brand built around how the business actually operates — not just how it looks.</p></div></article>
-        <article class="cap reveal"><div class="cap-cover g3"><span class="cdot"></span><span class="num">03</span></div><div class="cap-body"><h3>Technical Advisory</h3><p>An honest evaluation of the business, then the systems and automation built to fix what's inefficient.</p></div></article>
+        <article class="cap reveal"><div class="cap-cover"><span class="cdot"></span><span class="num">01</span></div><div class="cap-body"><h3>Digital</h3><p>Web design and development built for performance, clarity and long-term ownership — your accounts, no lock-in.</p><ul class="cap-list"><li>Web design</li><li>Development</li><li>UX / UI</li><li>Performance</li><li>Hosting &amp; deploy</li></ul></div></article>
+        <article class="cap reveal"><div class="cap-cover g2"><span class="cdot"></span><span class="num">02</span></div><div class="cap-body"><h3>Brand Identity</h3><p>A brand built around how the business actually operates — so it knows what it stands for, and how to stand out.</p><ul class="cap-list"><li>Brand strategy</li><li>Identity</li><li>Guidelines</li><li>Messaging</li></ul></div></article>
+        <article class="cap reveal"><div class="cap-cover g3"><span class="cdot"></span><span class="num">03</span></div><div class="cap-body"><h3>Technical Advisory</h3><p>An honest look at the business, then the systems and automation built to fix what's slow, manual or inefficient.</p><ul class="cap-list"><li>Diagnosis</li><li>Systems</li><li>Automation</li><li>SEO</li><li>Analytics</li></ul></div></article>
       </div>
     </div>
   </section>
@@ -439,6 +447,7 @@
   <!-- TESTIMONIALS -->
   <section class="alt">
     <div class="wrap">
+      <span class="rep">Kind words &nbsp;Kind words &nbsp;<b>Kind words</b>&nbsp; Kind words</span>
       <div class="sec-head"><h2>Kind <span class="italic">words.</span></h2><p>Placeholder quotes for the demo — swap in real client words as they come.</p></div>
       <div class="tcols">
         <div class="quote reveal"><p>“They didn't start by selling us a website — they worked out what was actually losing us leads, then fixed it.”</p><div class="who">Placeholder · Service business</div></div>
@@ -604,6 +613,14 @@
     const pill=document.querySelector('.contact-pill');
     if(pill) ScrollTrigger.create({trigger:'.results',start:'top 80%',
       onEnter:()=>pill.classList.add('lit'),onLeaveBack:()=>pill.classList.remove('lit')});
+
+    // hero gradient drifts with the cursor
+    const aurora=document.querySelector('.hero .aurora');
+    if(aurora && matchMedia('(pointer:fine)').matches){
+      let mx=0,my=0,cx=0,cy=0;
+      window.addEventListener('mousemove',e=>{mx=e.clientX/window.innerWidth-.5;my=e.clientY/window.innerHeight-.5;},{passive:true});
+      gsap.ticker.add(()=>{cx+=(mx-cx)*.05;cy+=(my-cy)*.05;gsap.set(aurora,{x:cx*90,y:cy*70});});
+    }
 
   } catch(e){ console.warn('motion init failed:',e); } }
 </script>
