@@ -201,6 +201,59 @@
   .contact-pill:hover .text-layer{transform:translateY(-1.25em)}
   @media(max-width:600px){.contact-pill{display:none}}
 
+  /* nav links condense into node/pill forms on scroll */
+  .nav-links a:not(.btn){display:inline-flex;align-items:center;gap:8px;border:1px solid transparent;border-radius:100px;transition:padding .4s var(--ease),background .4s var(--ease),border-color .4s var(--ease),color .3s}
+  .nav-links a:not(.btn)::before{content:"";width:0;height:6px;border-radius:50%;background:var(--twilight);opacity:0;transition:width .4s var(--ease),opacity .4s var(--ease)}
+  header.scrolled .nav-links a:not(.btn){padding:8px 15px;border-color:var(--border);background:rgba(255,255,255,.03)}
+  header.scrolled .nav-links a:not(.btn)::before{width:6px;opacity:1;box-shadow:0 0 10px var(--twilight)}
+  header.scrolled .nav-links a:not(.btn):hover{border-color:var(--twilight)}
+
+  /* What we do — capability cards */
+  .cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:42px}
+  @media(max-width:860px){.cap-grid{grid-template-columns:1fr}}
+  .cap{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:transform .45s var(--ease),border-color .45s var(--ease)}
+  .cap:hover{transform:translateY(-6px);border-color:rgba(124,115,240,.45)}
+  .cap-cover{height:150px;position:relative;background:var(--grad);overflow:hidden}
+  .cap-cover.g2{background:linear-gradient(135deg,#46566E,#1A2638)}
+  .cap-cover.g3{background:linear-gradient(315deg,#5B8DEF,#9B6CF0)}
+  .cap-cover .num{position:absolute;left:24px;bottom:16px;font-family:"Space Mono";font-size:1rem;color:rgba(255,255,255,.92)}
+  .cap-cover .cdot{position:absolute;right:22px;top:20px;width:10px;height:10px;border-radius:50%;background:#fff;opacity:.9;box-shadow:0 0 16px rgba(255,255,255,.6)}
+  .cap-body{padding:26px 28px 30px}
+  .cap-body h3{font-size:1.5rem;margin-bottom:10px}
+  .cap-body p{color:var(--mist);font-size:.98rem}
+
+  /* Toolkit marquee */
+  .toolkit-band{padding:66px 0;background:var(--ink);border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden}
+  .toolkit-band .lead{text-align:center;margin-bottom:32px}
+  .marq{display:flex;flex-direction:column;gap:16px}
+  .marq-row{display:flex;gap:14px;width:max-content;will-change:transform}
+  .marq-row.a{animation:marqA 40s linear infinite}
+  .marq-row.b{animation:marqB 46s linear infinite}
+  @keyframes marqA{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @keyframes marqB{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+  .chip{flex:0 0 auto;display:inline-flex;align-items:center;gap:9px;padding:11px 20px;border:1px solid var(--border);border-radius:100px;font-family:"Space Grotesk";font-weight:500;font-size:1rem;color:var(--light);background:rgba(255,255,255,.02)}
+  .chip::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--twilight)}
+  .chip.cap-chip::before{background:var(--azure)}
+
+  /* Web design — spotlight + code editor */
+  .spotlight{padding:110px 0}
+  .spot-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center;margin-top:32px}
+  @media(max-width:900px){.spot-grid{grid-template-columns:1fr;gap:36px}}
+  .spot-copy h2{font-size:clamp(2rem,4.5vw,3.4rem);margin-bottom:20px}
+  .spot-copy p{color:var(--mist);font-size:1.12rem;max-width:40ch;margin-bottom:10px}
+  .spot-copy p b{color:var(--light);font-weight:500}
+  .spot-copy .url{margin-top:22px;font-family:"Space Mono";font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--twilight)}
+  .editor{background:#0b1119;border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  .editor-bar{display:flex;align-items:center;gap:8px;padding:13px 16px;background:#141b26;border-bottom:1px solid var(--border)}
+  .editor-bar i{width:11px;height:11px;border-radius:50%;display:inline-block}
+  .editor-bar .r{background:#ff5f57}.editor-bar .y{background:#febc2e}.editor-bar .g{background:#28c840}
+  .editor-bar .file{margin-left:12px;font-family:"Space Mono";font-size:.72rem;color:var(--mist)}
+  .editor pre{margin:0;padding:22px 20px;font-family:"Space Mono";font-size:.82rem;line-height:1.8;color:#c7d0dc;overflow-x:auto}
+  .editor .ln{display:inline-block;width:1.7em;color:#3a4656;user-select:none}
+  .editor .k{color:#7C73F0}.editor .s{color:#8FC4ED}.editor .t{color:#5B8DEF}.editor .c{color:#5a6675}.editor .f{color:#9B6CF0}
+  .editor .caret{display:inline-block;width:8px;height:1.05em;background:var(--twilight);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+
   @media(prefers-reduced-motion:reduce){*{animation:none!important}.he-word span,.he-word i{opacity:1}.reveal{opacity:1;transform:none}.contact-pill{transition:none}html{scroll-behavior:smooth}.cube{transform:rotateX(-18deg) rotateY(28deg)}}
 </style>
 </head>
@@ -292,17 +345,74 @@
     </div>
   </section>
 
-  <!-- SERVICES — 3D cube -->
+  <!-- WHAT WE DO — capability cards -->
+  <section id="whatwedo">
+    <div class="wrap">
+      <div class="sec-head"><div><span class="mono">What we do</span><h2 class="fill">Design follows the <span class="italic">business.</span></h2></div><p>We start by understanding your goals. The design and build come second — not the other way around.</p></div>
+      <div class="cap-grid">
+        <article class="cap reveal"><div class="cap-cover"><span class="cdot"></span><span class="num">01</span></div><div class="cap-body"><h3>Digital</h3><p>Web design and development, built for performance, clarity and long-term ownership — on your own accounts, no lock-in.</p></div></article>
+        <article class="cap reveal"><div class="cap-cover g2"><span class="cdot"></span><span class="num">02</span></div><div class="cap-body"><h3>Brand Identity</h3><p>A brand built around how the business actually operates — not just how it looks.</p></div></article>
+        <article class="cap reveal"><div class="cap-cover g3"><span class="cdot"></span><span class="num">03</span></div><div class="cap-body"><h3>Technical Advisory</h3><p>An honest evaluation of the business, then the systems and automation built to fix what's inefficient.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLKIT — 3D cube (capabilities) -->
   <section id="services" class="cube-section">
-    <div class="cube-head"><span class="mono">What we do</span><h2>Six surfaces. <span class="italic">One studio.</span></h2></div>
+    <div class="cube-head"><span class="mono">Toolkit</span><h2>A creative spin through <span class="italic">the kit.</span></h2></div>
     <div class="cube-wrap">
       <div class="cube" id="cube">
-        <div class="face front"><span class="fl">01</span>Diagnose</div>
-        <div class="face dark back"><span class="fl">02</span>Websites</div>
-        <div class="face alt2 right"><span class="fl">03</span>Systems</div>
-        <div class="face left"><span class="fl">04</span>Automation</div>
-        <div class="face dark top"><span class="fl">05</span>Process design</div>
-        <div class="face alt2 bottom"><span class="fl">06</span>Aftercare</div>
+        <div class="face front"><span class="fl">01</span>Web design</div>
+        <div class="face dark back"><span class="fl">02</span>Brand identity</div>
+        <div class="face alt2 right"><span class="fl">03</span>Advisory</div>
+        <div class="face left"><span class="fl">04</span>SEO</div>
+        <div class="face dark top"><span class="fl">05</span>Motion</div>
+        <div class="face alt2 bottom"><span class="fl">06</span>Automation</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLKIT marquee -->
+  <section class="toolkit-band">
+    <div class="wrap"><p class="lead mono">The tools &amp; skills behind the work</p></div>
+    <div class="marq">
+      <div class="marq-row a">
+        <span class="chip">Figma</span><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">TypeScript</span><span class="chip">React</span><span class="chip">GSAP</span><span class="chip">Tailwind</span><span class="chip">After Effects</span><span class="chip">Illustrator</span><span class="chip">Photoshop</span><span class="chip">Vercel</span>
+        <span class="chip">Figma</span><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">TypeScript</span><span class="chip">React</span><span class="chip">GSAP</span><span class="chip">Tailwind</span><span class="chip">After Effects</span><span class="chip">Illustrator</span><span class="chip">Photoshop</span><span class="chip">Vercel</span>
+      </div>
+      <div class="marq-row b">
+        <span class="chip cap-chip">SEO</span><span class="chip cap-chip">Brand engagement</span><span class="chip cap-chip">Copywriting</span><span class="chip cap-chip">Automation</span><span class="chip cap-chip">Motion design</span><span class="chip cap-chip">CRM integration</span><span class="chip cap-chip">Performance</span><span class="chip cap-chip">Accessibility</span><span class="chip cap-chip">Analytics</span><span class="chip cap-chip">Hosting &amp; deploy</span>
+        <span class="chip cap-chip">SEO</span><span class="chip cap-chip">Brand engagement</span><span class="chip cap-chip">Copywriting</span><span class="chip cap-chip">Automation</span><span class="chip cap-chip">Motion design</span><span class="chip cap-chip">CRM integration</span><span class="chip cap-chip">Performance</span><span class="chip cap-chip">Accessibility</span><span class="chip cap-chip">Analytics</span><span class="chip cap-chip">Hosting &amp; deploy</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- WEB DESIGN — spotlight + code -->
+  <section class="spotlight alt">
+    <div class="wrap">
+      <span class="mono">Spotlight — our difference in action</span>
+      <div class="spot-grid">
+        <div class="spot-copy">
+          <h2>Web <span class="italic">design.</span></h2>
+          <p><b>Every line, custom-coded.</b> Pixel-perfect, not approximated.</p>
+          <p>No low-code builders. No platform lock-in.</p>
+          <p><b>Built to precision. Built to scale.</b></p>
+          <div class="url">heliumstudio.co.uk</div>
+        </div>
+        <div class="editor" aria-hidden="true">
+          <div class="editor-bar"><i class="r"></i><i class="y"></i><i class="g"></i><span class="file">hero.js</span></div>
+<pre><span class="ln">1</span><span class="c">// helium — every line, by hand</span>
+<span class="ln">2</span><span class="k">const</span> hero = document.<span class="f">querySelector</span>(<span class="s">'.hero'</span>);
+<span class="ln">3</span>
+<span class="ln">4</span><span class="c">// the rising dot — one per moment</span>
+<span class="ln">5</span>gsap.<span class="f">to</span>(<span class="s">'.dot'</span>, {
+<span class="ln">6</span>  y: <span class="t">-8</span>, repeat: <span class="t">-1</span>, yoyo: <span class="k">true</span>,
+<span class="ln">7</span>  ease: <span class="s">'power1.inOut'</span>,
+<span class="ln">8</span>});
+<span class="ln">9</span>
+<span class="ln">10</span>hero.<span class="f">classList</span>.<span class="f">add</span>(<span class="s">'rise'</span>);<span class="caret"></span>
+</pre>
+        </div>
       </div>
     </div>
   </section>
