@@ -435,7 +435,7 @@
         </div>
         <div class="editor" aria-hidden="true">
           <div class="editor-bar"><i class="r"></i><i class="y"></i><i class="g"></i><span class="file">hero.js</span></div>
-<pre><span class="ln">1</span><span class="c">// helium — every line, by hand</span>
+<pre id="heroCode"><span class="ln">1</span><span class="c">// helium — every line, by hand</span>
 <span class="ln">2</span><span class="k">const</span> hero = document.<span class="f">querySelector</span>(<span class="s">'.hero'</span>);
 <span class="ln">3</span>
 <span class="ln">4</span><span class="c">// the rising dot — one per moment</span>
@@ -573,6 +573,49 @@
   // reveals — always run, dependency-free
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.style.transitionDelay=(e.target.dataset.d||0)+'ms';e.target.classList.add('in')}}),{threshold:.16});
   reveals.forEach((el,i)=>{el.dataset.d=(i%3)*90;io.observe(el)});
+
+  // Web-design spotlight — "writes" the code as the section scrolls into view
+  (function(){
+    const pre=document.getElementById('heroCode'); if(!pre) return;
+    const CODE=[
+      [{c:'c',t:'// helium — every line, by hand'}],
+      [{c:'k',t:'const'},{t:' hero = document.'},{c:'f',t:'querySelector'},{t:'('},{c:'s',t:"'.hero'"},{t:');'}],
+      [],
+      [{c:'c',t:'// the rising dot — one per moment'}],
+      [{t:'gsap.'},{c:'f',t:'to'},{t:'('},{c:'s',t:"'.dot'"},{t:', {'}],
+      [{t:'  y: '},{c:'t',t:'-8'},{t:', repeat: '},{c:'t',t:'-1'},{t:', yoyo: '},{c:'k',t:'true'},{t:','}],
+      [{t:'  ease: '},{c:'s',t:"'power1.inOut'"},{t:','}],
+      [{t:'});'}],
+      [],
+      [{t:'hero.'},{c:'f',t:'classList'},{t:'.'},{c:'f',t:'add'},{t:'('},{c:'s',t:"'rise'"},{t:');'}]
+    ];
+    const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    const OPS=[];
+    CODE.forEach((line,li)=>{
+      line.forEach(tok=>{ for(const ch of tok.t) OPS.push({c:tok.c||null,ch}); });
+      if(li<CODE.length-1) OPS.push({nl:true});
+    });
+    function build(n){
+      let html='',line=1,curCls=null,buf='';
+      const flush=()=>{ if(buf){ html+=curCls?`<span class="${curCls}">${esc(buf)}</span>`:esc(buf); buf=''; } };
+      html+=`<span class="ln">${line}</span>`;
+      for(let i=0;i<n;i++){ const op=OPS[i];
+        if(op.nl){ flush(); line++; html+='\n'+`<span class="ln">${line}</span>`; }
+        else { if(op.c!==curCls){ flush(); curCls=op.c; } buf+=op.ch; } }
+      flush();
+      html+='<span class="caret"></span>';
+      return html;
+    }
+    if(reduce){ pre.innerHTML=build(OPS.length); return; }
+    pre.innerHTML=build(0);
+    let started=false;
+    const type=()=>{ let i=0; const step=()=>{ i++; pre.innerHTML=build(i);
+        if(i>=OPS.length) return;
+        const op=OPS[i-1]; let d=15; if(op&&op.nl) d=155; else if(op&&op.ch===' ') d=8;
+        setTimeout(step,d); }; step(); };
+    const io2=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting&&!started){started=true;type();io2.disconnect();} }),{threshold:.4});
+    io2.observe(pre);
+  })();
 
   // reduced-motion / no-libs fallback: make the work carousel natively scrollable
   if(reduce || !window.gsap){const c=document.querySelector('.carousel-container');if(c){c.style.overflowX='auto';c.style.height='auto';c.style.padding='12vh 0';}}
